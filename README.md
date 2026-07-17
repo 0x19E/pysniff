@@ -8,10 +8,12 @@ Network packet sniffer made in python, designed for Windows environments using r
 1. Clone this repo:
 ```bash
    git clone https://github.com/0x18F/pysniff.git
-   cd pysniff```
+   cd pysniff
+   ```
 2. Open a terminal as admin & run the script:
 ```bash
-python main.py```
+python main.py
+```
 
 To stop capturing and restore your network adapter settings, press Ctrl + C
 
