@@ -22,14 +22,19 @@ subprocess.run('cls', shell=True)
 def sniff():
         print(logo)
         time.sleep(2)
+
+        # Get private IP
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
             s.connect(('8.8.8.8', 80))
             HOST_IP = s.getsockname()[0]
 
+        #Enable promiscuous mode to see all packets
         with socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_IP) as s:
             s.bind((HOST_IP, 0))
             s.ioctl(socket.SIO_RCVALL, socket.RCVALL_ON)
             print("[green][+] Listening for traffic...[/green]")
+
+            # Filter packets by type
             try:
                 while True:
                     packet, _ = s.recvfrom(65565)
@@ -57,6 +62,7 @@ def sniff():
             except Exception as e:
                  s.ioctl(socket.SIO_RCVALL, socket.RCVALL_OFF)
                  print(f"[[red]-[/red]] Error: {e}")
+
 if __name__ == "__main__":
     sniff()
             
